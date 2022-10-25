@@ -1,0 +1,438 @@
+definitions:
+  customer.Address:
+    properties:
+      district:
+        type: string
+      id:
+        type: integer
+      street:
+        type: string
+    type: object
+  customer.Customer:
+    properties:
+      addresses:
+        items:
+          $ref: '#/definitions/customer.Address'
+        type: array
+      bio:
+        type: string
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      email:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: integer
+      last_name:
+        type: string
+      phone_number:
+        type: string
+      posts:
+        items:
+          $ref: '#/definitions/customer.Post'
+        type: array
+      rankings:
+        items:
+          $ref: '#/definitions/customer.Ranking'
+        type: array
+      updated_at:
+        type: string
+    type: object
+  customer.CustomerRequest:
+    properties:
+      addresses:
+        items:
+          $ref: '#/definitions/customer.Address'
+        type: array
+      bio:
+        type: string
+      created_at:
+        type: integer
+      deleted_at:
+        type: integer
+      email:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      phone_number:
+        type: string
+      updated_at:
+        type: integer
+    type: object
+  customer.Post:
+    properties:
+      created_at:
+        type: string
+      customer_id:
+        type: integer
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  customer.Ranking:
+    properties:
+      customer_id:
+        type: integer
+      description:
+        type: string
+      name:
+        type: string
+      post_id:
+        type: integer
+      ranking:
+        type: integer
+    type: object
+  post.Media:
+    properties:
+      id:
+        type: integer
+      link:
+        type: string
+      name:
+        type: string
+      type:
+        type: string
+    type: object
+  post.Post:
+    properties:
+      created_at:
+        type: string
+      customer_id:
+        type: integer
+      description:
+        type: string
+      id:
+        type: integer
+      medias:
+        items:
+          $ref: '#/definitions/post.Media'
+        type: array
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  post.PostReq:
+    properties:
+      customer_id:
+        type: integer
+      description:
+        type: string
+      id:
+        type: integer
+      medias:
+        items:
+          $ref: '#/definitions/post.Media'
+        type: array
+      name:
+        type: string
+    type: object
+  reyting.Empty:
+    type: object
+  reyting.Ranking:
+    properties:
+      customer_id:
+        type: integer
+      description:
+        type: string
+      name:
+        type: string
+      post_id:
+        type: integer
+      ranking:
+        type: integer
+    type: object
+  reyting.Rankings:
+    properties:
+      rankings:
+        items:
+          $ref: '#/definitions/reyting.Ranking'
+        type: array
+    type: object
+info:
+  contact: {}
+paths:
+  /v1/create-customer:
+    post:
+      consumes:
+      - application/json
+      description: this func creates customer
+      parameters:
+      - description: Customer
+        in: body
+        name: customer
+        required: true
+        schema:
+          $ref: '#/definitions/customer.CustomerRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/customer.Customer'
+      summary: create customer with info
+      tags:
+      - customer
+  /v1/create-post:
+    post:
+      consumes:
+      - application/json
+      description: this func creates post
+      parameters:
+      - description: Post
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/post.PostReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/post.Post'
+      summary: create post with info
+      tags:
+      - post
+  /v1/create-ranking:
+    post:
+      consumes:
+      - application/json
+      description: this func creates ranking
+      parameters:
+      - description: Ranking
+        in: body
+        name: ranking
+        required: true
+        schema:
+          $ref: '#/definitions/reyting.Ranking'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reyting.Empty'
+      summary: create reyting
+      tags:
+      - reyting
+  /v1/delete-customer/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: this func delete customer by customer id
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+      summary: delete customer
+      tags:
+      - customer
+  /v1/delete-post/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: this func delete post by post id
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+      summary: delete post
+      tags:
+      - post
+  /v1/get-customer/{id}:
+    get:
+      consumes:
+      - application/json
+      description: this func get customer
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+      summary: get customer with info
+      tags:
+      - customer
+  /v1/get-post/{id}:
+    get:
+      consumes:
+      - application/json
+      description: this func get post by id
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+      summary: get post
+      tags:
+      - post
+  /v1/getpostlist/{id}:
+    get:
+      consumes:
+      - application/json
+      description: this func get list of customers by post id
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+      summary: get post list
+      tags:
+      - post
+  /v1/getranking-customer/{id}:
+    get:
+      consumes:
+      - application/json
+      description: this func get rankings of posts
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reyting.Rankings'
+      summary: get reyting
+      tags:
+      - reyting
+  /v1/getranking-post/{id}:
+    get:
+      consumes:
+      - application/json
+      description: this func get rankings of posts
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reyting.Rankings'
+      summary: get reyting
+      tags:
+      - reyting
+  /v1/list-customer:
+    get:
+      consumes:
+      - application/json
+      description: this func get list of customers
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+      summary: get customer list
+      tags:
+      - customer
+  /v1/list-post:
+    get:
+      consumes:
+      - application/json
+      description: this func get list of posts
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+      summary: get post list
+      tags:
+      - post
+  /v1/update-customer:
+    put:
+      consumes:
+      - application/json
+      description: this func update customer
+      parameters:
+      - description: Customer
+        in: body
+        name: customer
+        required: true
+        schema:
+          $ref: '#/definitions/customer.Customer'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/customer.Customer'
+      summary: update customer
+      tags:
+      - customer
+  /v1/update-post:
+    put:
+      consumes:
+      - application/json
+      description: this func update post
+      parameters:
+      - description: Post
+        in: body
+        name: update
+        required: true
+        schema:
+          $ref: '#/definitions/post.Post'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/post.Post'
+      summary: update post
+      tags:
+      - post
+swagger: "2.0"
