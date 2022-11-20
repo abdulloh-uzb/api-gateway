@@ -19,6 +19,19 @@ type Option struct {
 }
 
 // New ...
+// @title           Exam
+// @version         1.0
+// @description     This is test project made for exam
+
+// @contact.name   Usmonov
+// @contact.url    https://t.me/abdullohus
+// @contact.email  uabdulloh11@gmail.com
+
+// @host      18.181.186.212
+
+// @securityDefinitions.apikey BearerAuth
+// @in header
+// @name Authorization
 func New(option Option) *gin.Engine {
 	router := gin.New()
 
