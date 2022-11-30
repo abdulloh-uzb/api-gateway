@@ -1,6 +1,7 @@
 package logger
 
 import (
+	"fmt"
 	"time"
 
 	"go.uber.org/zap"
@@ -41,6 +42,7 @@ var customTimeFormat string
 
 // New ...
 func New(level, namespace string) *LoggerImpl {
+	fmt.Println("newga kirdi")
 	if level == "" {
 		level = LevelInfo
 	}

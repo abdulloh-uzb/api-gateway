@@ -3,10 +3,10 @@ package services
 import (
 	"fmt"
 
-	"api-exam/config"
-	pbc "api-exam/genproto/customer"
-	pbp "api-exam/genproto/post"
-	pbr "api-exam/genproto/reyting"
+	"exam/api-gateway/config"
+	pbc "exam/api-gateway/genproto/customer"
+	pbp "exam/api-gateway/genproto/post"
+	pbr "exam/api-gateway/genproto/reyting"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -45,7 +45,8 @@ func NewServiceManager(conf *config.Config) (IServiceManager, error) {
 	if err != nil {
 		return nil, err
 	}
-
+	fmt.Println("2")
+	fmt.Println("post service host va port: ", conf.PostServiceHost, conf.PostServicePort)
 	connPost, err := grpc.Dial(
 		fmt.Sprintf("%s:%d", conf.PostServiceHost, conf.PostServicePort),
 		grpc.WithTransportCredentials(insecure.NewCredentials()))

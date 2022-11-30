@@ -1,14 +1,15 @@
 package v1
 
 import (
-	"api-exam/genproto/customer"
+	"exam/api-gateway/genproto/customer"
+	"fmt"
 
 	"context"
 	"net/http"
 	"strconv"
 	"time"
 
-	l "api-exam/pkg/logger"
+	l "exam/api-gateway/pkg/logger"
 
 	"github.com/gin-gonic/gin"
 	"google.golang.org/protobuf/encoding/protojson"
@@ -28,8 +29,8 @@ func (h *handlerV1) CreateCustomer(c *gin.Context) {
 		jspbMarshal protojson.MarshalOptions
 	)
 	jspbMarshal.UseProtoNames = true
-
 	err := c.ShouldBindJSON(&body)
+	fmt.Println("error: handlers 34", err)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
@@ -37,9 +38,11 @@ func (h *handlerV1) CreateCustomer(c *gin.Context) {
 		h.log.Error("failed to bind json", l.Error(err))
 		return
 	}
+	fmt.Println("error: handlers 42", err)
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
 	defer cancel()
+	fmt.Println("error: handlers 46", err)
 
 	response, err := h.serviceManager.CustomerService().Create(ctx, &customer.CustomerRequest{
 		FirstName: body.FirstName,
@@ -51,7 +54,8 @@ func (h *handlerV1) CreateCustomer(c *gin.Context) {
 		UpdatedAt: body.UpdatedAt,
 		DeletedAt: body.DeletedAt,
 	})
-
+	fmt.Println("error: handlers 58", err)
+	fmt.Println("response: ", response)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
@@ -59,6 +63,7 @@ func (h *handlerV1) CreateCustomer(c *gin.Context) {
 		h.log.Error("failed to create product", l.Error(err))
 		return
 	}
+	fmt.Println("error: handlers 66", err)
 
 	c.JSON(http.StatusCreated, response)
 }

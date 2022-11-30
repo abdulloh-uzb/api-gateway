@@ -1,10 +1,10 @@
 package api
 
 import (
-	v1 "api-exam/api/handlers/v1"
-	"api-exam/config"
-	"api-exam/pkg/logger"
-	"api-exam/services"
+	v1 "exam/api-gateway/api/handlers/v1"
+	"exam/api-gateway/config"
+	"exam/api-gateway/pkg/logger"
+	"exam/api-gateway/services"
 
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"

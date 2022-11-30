@@ -1,9 +1,9 @@
 package v1
 
 import (
-	"api-exam/genproto/reyting"
-	l "api-exam/pkg/logger"
 	"context"
+	"exam/api-gateway/genproto/reyting"
+	l "exam/api-gateway/pkg/logger"
 	"net/http"
 	"strconv"
 	"time"

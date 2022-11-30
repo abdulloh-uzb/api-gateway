@@ -1,9 +1,9 @@
 package v1
 
 import (
-	"api-exam/config"
-	"api-exam/pkg/logger"
-	"api-exam/services"
+	"exam/api-gateway/config"
+	"exam/api-gateway/pkg/logger"
+	"exam/api-gateway/services"
 )
 
 type handlerV1 struct {

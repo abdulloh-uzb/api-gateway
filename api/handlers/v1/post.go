@@ -1,9 +1,9 @@
 package v1
 
 import (
-	"api-exam/genproto/post"
-	l "api-exam/pkg/logger"
 	"context"
+	"exam/api-gateway/genproto/post"
+	l "exam/api-gateway/pkg/logger"
 	"fmt"
 	"net/http"
 	"strconv"
